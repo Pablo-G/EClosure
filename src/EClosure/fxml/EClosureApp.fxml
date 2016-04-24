@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -126,7 +127,10 @@
             </TitledPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="450.0" layoutY="25.0" prefHeight="725.0" prefWidth="550.0" />
+      <AnchorPane layoutX="450.0" layoutY="25.0" prefHeight="725.0" prefWidth="550.0">
+         <children>
+            <ImageView fx:id="graph" fitHeight="725.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true" />
+         </children></AnchorPane>
       <AnchorPane prefHeight="550.0" prefWidth="450.0">
          <children>
             <TreeTableView fx:id="auTT" prefHeight="550.0" prefWidth="450.0">
@@ -140,5 +144,6 @@
          </children>
       </AnchorPane>
       <Button layoutX="878.0" mnemonicParsing="false" onAction="#calculaEC" text="Calcular ε-cerradura" />
+      <Button layoutX="724.0" mnemonicParsing="false" onAction="#generaCG" text="Genera Código de Gráfica" />
    </children>
 </AnchorPane>

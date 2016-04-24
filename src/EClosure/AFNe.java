@@ -127,11 +127,15 @@ public class AFNe{
 
 	public String graphFormat(){
 		String f = "";
+		f = f + "digraph G{\n";
 		for (Estado e:estados) {
 			for (Transicion t:e.getTransiciones()) {
-				f = f + e.getNombre() + "->" + "\n";
+				for (Estado et:t.getEstados()) {
+					f = f + e.getNombre() + " -> " + et.getNombre() + " [label=\"" + t.getSimbolo() + "\"]\n";
+				}
 			}
 		}
+		f = f + "}";
 		return f;
 	}
 

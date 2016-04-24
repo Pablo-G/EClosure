@@ -33,6 +33,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.PDFont;
+import java.io.*;
 
 public class ControladorApp{
 
@@ -334,6 +335,24 @@ public class ControladorApp{
 		}
 	}
 
+	@FXML protected void generaCG(ActionEvent event){
+		String codigo = automata.graphFormat();
+		System.out.println(codigo);
+
+		File temp = new File("./[EClosure]GraficaAFNe.dot");
+		try{
+			temp.createNewFile();
+        	PrintStream ps = new PrintStream(new BufferedOutputStream(new FileOutputStream(temp)),true);
+			PrintStream stdout = System.out;
+			System.setOut(ps);
+			System.out.println(codigo);
+			ps.close();
+			System.setOut(stdout);
+        }catch(Exception e){
+        	System.err.println(e);
+        }
+	}
+
 	@FXML protected void calculaEC(ActionEvent event){
 		HashSet<Estado>[][] info = automata.eCerradura();
 		try{
@@ -365,7 +384,7 @@ public class ControladorApp{
 	        doc.save("[EClosure]ECerraduraAFNe.pdf");
 	        doc.close();
 	    } catch (Exception e){
-	        System.out.println(e);
+	        System.err.println(e);
 	    }
 	}
 }
