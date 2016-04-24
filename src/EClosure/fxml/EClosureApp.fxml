@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EClosure.ControladorApp">
    <children>
       <AnchorPane layoutY="550.0" prefHeight="200.0" prefWidth="450.0">
          <children>
@@ -17,9 +17,14 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TextField layoutX="14.0" layoutY="14.0" />
-                                    <Button layoutX="172.0" layoutY="14.0" mnemonicParsing="false" text="Agregar" />
+                                    <TextField fx:id="sAgreT" layoutX="14.0" layoutY="14.0" />
+                                    <Button layoutX="172.0" layoutY="14.0" mnemonicParsing="false" onAction="#sAgreB" text="Agregar" />
                                     <Text layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se pueden agregar varios símbolos a la vez separándolos por &quot;;&quot; (Punto y coma)" wrappingWidth="340.13671875" />
+                                    <ScrollPane layoutX="2.0" layoutY="78.0" prefHeight="60.0" prefWidth="443.0">
+                                       <content>
+                                          <Text fx:id="sAgreErr" fill="#b54141" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="440.13671875" />
+                                       </content>
+                                    </ScrollPane>
                                  </children>
                               </AnchorPane>
                         </content>
@@ -32,10 +37,11 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TextField layoutX="76.0" layoutY="14.0" />
+                                                <TextField fx:id="qAgreT" layoutX="76.0" layoutY="14.0" />
                                                 <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" />
-                                                <CheckBox layoutX="76.0" layoutY="50.0" mnemonicParsing="false" text="Será Estado Final" />
-                                                <Button layoutX="371.0" layoutY="14.0" mnemonicParsing="false" text="Agregrar" />
+                                                <CheckBox fx:id="qAgreB" layoutX="76.0" layoutY="48.0" mnemonicParsing="false" text="Será Estado Final" />
+                                                <Button layoutX="371.0" layoutY="14.0" mnemonicParsing="false" onAction="#qAgreB" text="Agregrar" />
+                                                <Text fx:id="qAgreErr" fill="#b54141" layoutX="14.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="420.13671875" />
                                              </children>
                                           </AnchorPane>
                                     </content>
@@ -44,11 +50,12 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <Button layoutX="367.0" layoutY="46.0" mnemonicParsing="false" text="Modificar" />
-                                                <CheckBox layoutX="76.0" layoutY="50.0" mnemonicParsing="false" text="Será Estado Final" />
+                                                <Button layoutX="367.0" layoutY="46.0" mnemonicParsing="false" onAction="#qModiB" text="Modificar" />
+                                                <CheckBox fx:id="qModiB" layoutX="76.0" layoutY="50.0" mnemonicParsing="false" text="Será Estado Final" />
                                                 <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" />
-                                                <TextField layoutX="76.0" layoutY="14.0" />
-                                                <ChoiceBox layoutX="284.0" layoutY="14.0" prefWidth="150.0" />
+                                                <TextField fx:id="qModiT" layoutX="76.0" layoutY="14.0" />
+                                                <ChoiceBox fx:id="qModiCB" layoutX="284.0" layoutY="14.0" prefWidth="150.0" />
+                                                <Text fx:id="qModiErr" fill="#b54141" layoutX="14.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="420.13671875" />
                                              </children>
                                           </AnchorPane>
                                       </content>
@@ -57,8 +64,8 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <Button layoutX="174.0" layoutY="14.0" mnemonicParsing="false" text="Eliminar" />
-                                                <ChoiceBox layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
+                                                <Button layoutX="174.0" layoutY="14.0" mnemonicParsing="false" onAction="#qElimB" text="Eliminar" />
+                                                <ChoiceBox fx:id="qElimCB" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
                                              </children>
                                           </AnchorPane>
                                     </content>
@@ -75,14 +82,22 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <ChoiceBox layoutX="77.0" layoutY="14.0" prefWidth="150.0" />
-                                                <ComboBox layoutX="77.0" layoutY="46.0" prefWidth="150.0" />
-                                                <TextField layoutX="113.0" layoutY="77.0" />
+                                                <ChoiceBox fx:id="dAgreECB" layoutX="77.0" layoutY="14.0" prefWidth="150.0" />
                                                 <Text layoutX="27.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado:" />
                                                 <Text layoutX="27.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Símbolo:" />
                                                 <Text layoutX="27.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado(s) al que se transfiere:" wrappingWidth="84.638671875" />
-                                                <Text layoutX="263.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se pueden agregar varios estados a la vez separándolos por &quot;;&quot; (Punto y coma)" wrappingWidth="187.126953125" />
-                                                <Button layoutX="418.0" layoutY="14.0" mnemonicParsing="false" />
+                                                <Text layoutX="265.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se pueden agregar varios estados a la vez separándolos por &quot;;&quot; (Punto y coma)" wrappingWidth="176.126953125">
+                                                   <font>
+                                                      <Font size="9.0" />
+                                                   </font></Text>
+                                                <Button layoutX="332.0" layoutY="14.0" mnemonicParsing="false" onAction="#dAgreB" text="Agrega/Modifica" />
+                                                <ScrollPane layoutX="238.0" layoutY="41.0" prefHeight="26.0" prefWidth="200.0">
+                                                   <content>
+                                                      <Text fx:id="dAgreErr" fill="#b54141" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="197.13671875" />
+                                                   </content>
+                                                </ScrollPane>
+                                                <ChoiceBox fx:id="dAgreSCB" layoutX="77.0" layoutY="46.0" prefWidth="150.0" />
+                                                <TextField fx:id="dAgreET" layoutX="113.0" layoutY="80.0" />
                                              </children>
                                           </AnchorPane>
                                     </content>
@@ -91,11 +106,12 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <Button layoutX="375.0" layoutY="14.0" mnemonicParsing="false" text="Eliminar" />
+                                                <Button layoutX="375.0" layoutY="14.0" mnemonicParsing="false" onAction="#dModiB" text="Eliminar" />
                                                 <Text layoutX="27.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Símbolo:" />
                                                 <Text layoutX="27.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado:" />
-                                                <ComboBox layoutX="77.0" layoutY="46.0" prefWidth="150.0" />
-                                                <ChoiceBox layoutX="77.0" layoutY="14.0" prefWidth="150.0" />
+                                                <ChoiceBox fx:id="dModiECB" layoutX="77.0" layoutY="14.0" prefWidth="150.0" />
+                                                <Text fx:id="dModiErr" fill="#b54141" layoutX="27.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="408.13671875" />
+                                                <ChoiceBox fx:id="dModiSCB" layoutX="77.0" layoutY="46.0" prefWidth="150.0" />
                                              </children>
                                           </AnchorPane>
                                       </content>
@@ -113,12 +129,12 @@
       <AnchorPane layoutX="450.0" prefHeight="750.0" prefWidth="550.0" />
       <AnchorPane prefHeight="550.0" prefWidth="450.0">
          <children>
-            <TreeTableView prefHeight="550.0" prefWidth="450.0">
+            <TreeTableView fx:id="auTT" prefHeight="550.0" prefWidth="450.0">
               <columns>
-                <TreeTableColumn prefWidth="93.0" text="Q" />
-                <TreeTableColumn prefWidth="226.0" text="Σ" />
-                  <TreeTableColumn minWidth="2.0" prefWidth="85.0" text="ε" />
-                  <TreeTableColumn prefWidth="44.0" text="F" />
+                <TreeTableColumn fx:id="auTTQ" prefWidth="93.0" text="Q" />
+                <TreeTableColumn fx:id="auTTS" prefWidth="226.0" text="Σ" />
+                  <TreeTableColumn fx:id="auTTE" minWidth="2.0" prefWidth="85.0" text="ε" />
+                  <TreeTableColumn fx:id="auTTF" prefWidth="44.0" text="F" />
               </columns>
             </TreeTableView>
          </children>

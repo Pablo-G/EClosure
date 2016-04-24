@@ -24,6 +24,18 @@ public class AFNe{
 		this.edoInicial = inicial;
 	}
 
+	public Estado getInicial(){
+		return this.edoInicial;
+	}
+
+	public HashSet<String> getSimbolos(){
+		return this.simbolos;
+	}
+
+	public HashSet<Estado> getEstados(){
+		return this.estados;
+	}
+
 	public void agregaSimbolo(String s) throws SymbolAlreadyExistsException{
 		if (!simbolos.add(s)) {
 			throw new SymbolAlreadyExistsException("El simbolo " + s + " ya se encuentra en Sigma.");
@@ -43,8 +55,10 @@ public class AFNe{
 
 	public void modificaEstado(Estado e, String nNombre, boolean neFinal) throws StateAlreadyExistsException{
 		for (Estado es: estados) {
-			if (nNombre.equals(es.getNombre())) {
-				throw new StateAlreadyExistsException("Ya existe un estado llamado " + nNombre + ".");
+			if (!e.equals(es)) {			
+				if (nNombre.equals(es.getNombre())) {
+					throw new StateAlreadyExistsException("Ya existe un estado llamado " + nNombre + ".");
+				}
 			}
 		}
 		e.setNombre(nNombre);
@@ -70,7 +84,7 @@ public class AFNe{
 	}
 
 	public void agregaTrans(Estado e, String s, HashSet<Estado> estados) throws Exception{
-		if (estados.contains(e)) {
+		if (this.estados.contains(e)) {
 			if (simbolos.contains(s)) {
 				Transicion t = new Transicion(s,estados);
 				e.agregaTrans(t);

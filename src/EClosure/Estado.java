@@ -8,6 +8,8 @@
 package EClosure;
 
 import java.util.HashSet;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Estado{
 
@@ -53,6 +55,10 @@ public class Estado{
 		}
 	}
 
+	public StringProperty getTNombre(){
+		return new SimpleStringProperty(nombre);
+	}
+
 	@Override public boolean equals(Object o) {
         if (o == null){
             return false;
@@ -71,6 +77,10 @@ public class Estado{
         	return false;
         }
         return true;
+    }
+
+    @Override public String toString(){
+    	return this.nombre;
     }
 
 }
