@@ -61,6 +61,9 @@
              encoding="utf-8">
       <doctitle><![CDATA[<h1>EClosure</h1>]]></doctitle>
       <link href="http://docs.oracle.com/javase/8/docs/api/" />
+      <classpath>
+        <pathelement location="${lib.dir}/pdfbox-2.0.0.jar" />
+      </classpath>
     </javadoc>
   </target>
 

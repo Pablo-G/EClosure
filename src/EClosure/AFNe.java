@@ -8,8 +8,11 @@
 package EClosure;
 
 import java.util.HashSet;
+import  java.util.Stack;
 
 public class AFNe{
+
+	public static final String EPSILON = "EPSILON";
 
 	private HashSet<Estado> estados;
 	private HashSet<String> simbolos;
@@ -20,7 +23,7 @@ public class AFNe{
 		this.estados = new HashSet<Estado>();
 		this.estados.add(inicial);
 		this.simbolos = new HashSet<String>();
-		this.simbolos.add("EPSILON");
+		this.simbolos.add(AFNe.EPSILON);
 		this.edoInicial = inicial;
 	}
 
@@ -121,5 +124,59 @@ public class AFNe{
 		}
 		throw new StateDoesNotExistException("El estado " + nombre + " no esta en Q.");
 	}
+
+	public String graphFormat(){
+		String f = "";
+		for (Estado e:estados) {
+			for (Transicion t:e.getTransiciones()) {
+				f = f + e.getNombre() + "->" + "\n";
+			}
+		}
+		return f;
+	}
+
+	public HashSet<Estado>[][] eCerradura(){
+		Estado[] pilaQ = new Estado[estados.size()];
+		int i = 0;
+		for (Estado e:estados) {
+			pilaQ[i] = e;
+			i++;
+		}
+		HashSet<Estado>[][] tabla = nuevaTabla();
+		i = 0;
+		for (Estado pilaQPop: pilaQ) {
+			Stack<Estado> pila = new Stack<Estado>();
+			Estado p = pilaQPop;
+			HashSet<Estado> shP = new HashSet<Estado>();
+			shP.add(p);
+			tabla[i][0] = shP;
+			HashSet<Estado> cerradura = new HashSet<Estado>();
+			cerradura.add(p);
+			pila.push(p);
+			while(!pila.empty()){
+				p = pila.pop();
+				for (Transicion t:p.getTransiciones()) {
+					if (t.getSimbolo().equals(AFNe.EPSILON)) {
+						HashSet<Estado> transEpsilon = t.getEstados();
+						for (Estado teep:transEpsilon) {
+							Estado q = teep;
+							if (!cerradura.contains(q)) {
+								pila.push(q);
+								cerradura.add(q);
+							}
+						}
+					}
+				}
+			}
+			tabla[i][1] = cerradura;
+			i++;
+		}
+		return tabla;
+	}
+
+    @SuppressWarnings("unchecked") private HashSet<Estado>[][] nuevaTabla() {
+		HashSet[][] tabla = new HashSet[estados.size()][2];
+		return (HashSet<Estado>[][])tabla;
+    }
 
 }

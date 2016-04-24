@@ -28,6 +28,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.util.Callback;
 import javafx.scene.control.ListCell;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.PDFont;
 
 public class ControladorApp{
 
@@ -35,34 +40,6 @@ public class ControladorApp{
 
 	public ControladorApp(){
 		this.automata = new AFNe();
-		/*
-		try{
-			Estado q0 = new Estado("Q0",false);
-			Estado q1 = new Estado("Q1",false);
-			Estado q2 = new Estado("Q2",true);
-			this.automata.agregaEstado(q0);
-			this.automata.agregaEstado(q1);
-			this.automata.agregaEstado(q2);
-			this.automata.agregaSimbolo("a");
-			this.automata.agregaSimbolo("b");
-			this.automata.agregaSimbolo("c");
-			HashSet<Estado> etransA = new HashSet<Estado>();
-			etransA.add(q1);
-			this.automata.agregaTrans(q0,"a",etransA);
-			HashSet<Estado> etransB = new HashSet<Estado>();
-			etransB.add(q2);
-			this.automata.agregaTrans(q1,"b",etransB);
-			HashSet<Estado> etransC = new HashSet<Estado>();
-			etransC.add(q0);
-			etransC.add(q1);
-			etransC.add(q2);
-			this.automata.agregaTrans(q2,"c",etransC);
-			HashSet<Estado> etransEP = new HashSet<Estado>();
-			etransEP.add(q2);
-			this.automata.agregaTrans(q2,"EPSILON",etransEP);
-		}catch(Exception e){
-		}
-		*/
 	}
 
 	@SuppressWarnings("unchecked") @FXML private void initialize() {
@@ -90,7 +67,7 @@ public class ControladorApp{
     	transS.setSortable(true);
     	transS.setResizable(true);
 		for (String s:automata.getSimbolos()) {
-			if (!s.equals("EPSILON")) {	
+			if (!s.equals(AFNe.EPSILON)) {	
 				TreeTableColumn<Estado, String> transSim = new TreeTableColumn<>();
 		    	transSim.setText(s);
 		    	transSim.setEditable(false);
@@ -125,7 +102,7 @@ public class ControladorApp{
 		transE.setCellValueFactory(e -> {
 			String ests = "{";
 			for (Transicion t:e.getValue().getValue().getTransiciones()) {
-				if ("EPSILON".equals(t.getSimbolo())) {
+				if (AFNe.EPSILON.equals(t.getSimbolo())) {
 					for (Estado te:t.getEstados()) {
 						ests = ests + te.getNombre();
 						ests = ests + ",";
@@ -214,6 +191,17 @@ public class ControladorApp{
 		if (!sAgreT.getText().equals("")) {
 			String errores = "";
 			String[] simbolos = sAgreT.getText().split(";");
+			String[] simbolosV = new String[simbolos.length];
+			int i = 0;
+			for (String s:simbolos) {
+				if (s.length()!=1) {
+					simbolosV[i] = "[" + s + "]";
+				}else{
+					simbolosV[i] = s;
+				}
+				i++;
+			}
+			simbolos = simbolosV;
 			for (String s:simbolos) {
 				if (!s.equals("")) {
 					try{
@@ -344,5 +332,40 @@ public class ControladorApp{
 			actualizaListasDesp();
 			actualizaDatosTabla();
 		}
+	}
+
+	@FXML protected void calculaEC(ActionEvent event){
+		HashSet<Estado>[][] info = automata.eCerradura();
+		try{
+			PDDocument doc = new PDDocument();
+        	PDPage page = new PDPage();
+
+            doc.addPage(page);
+	        PDFont font = PDType1Font.HELVETICA_BOLD;
+
+	        PDPageContentStream content = new PDPageContentStream(doc, page);
+	        for (int i = 0; i < info.length; i++) {
+	        	content.beginText();
+	        	content.setFont( font, 10 );
+	       		content.moveTextPositionByAmount( 100, 700 + (i*15) );
+	        	String ds = AFNe.EPSILON + "-cerradura(";
+	        	for (Estado e:info[i][0]) {
+	        		ds = ds + e.getNombre();
+	        	}
+	        	ds = ds + ") = {";
+				for (Estado e:info[i][1]) {
+					ds = ds + e.getNombre() + ",";
+				}
+				ds = ds.substring(0,ds.length()-1) + "}\n";
+				System.out.println(ds);
+	        	content.drawString(ds);
+	        	content.endText();
+	        }
+	        content.close();
+	        doc.save("[EClosure]ECerraduraAFNe.pdf");
+	        doc.close();
+	    } catch (Exception e){
+	        System.out.println(e);
+	    }
 	}
 }

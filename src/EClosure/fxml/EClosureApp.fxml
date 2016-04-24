@@ -126,7 +126,7 @@
             </TitledPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="450.0" prefHeight="750.0" prefWidth="550.0" />
+      <AnchorPane layoutX="450.0" layoutY="25.0" prefHeight="725.0" prefWidth="550.0" />
       <AnchorPane prefHeight="550.0" prefWidth="450.0">
          <children>
             <TreeTableView fx:id="auTT" prefHeight="550.0" prefWidth="450.0">
@@ -139,5 +139,6 @@
             </TreeTableView>
          </children>
       </AnchorPane>
+      <Button layoutX="878.0" mnemonicParsing="false" onAction="#calculaEC" text="Calcular ε-cerradura" />
    </children>
 </AnchorPane>
