@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="550.0" prefHeight="200.0" prefWidth="450.0">
+         <children>
+            <TitledPane animated="false" layoutY="-1.0" prefHeight="200.0" prefWidth="450.0" text="Configuración">
+               <content>
+                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="     Σ     ">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField layoutX="14.0" layoutY="14.0" />
+                                    <Button layoutX="172.0" layoutY="14.0" mnemonicParsing="false" text="Agregar" />
+                                    <Text layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se pueden agregar varios símbolos a la vez separándolos por &quot;;&quot; (Punto y coma)" wrappingWidth="340.13671875" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="     Q     ">
+                           <content>
+                              <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Agregar">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TextField layoutX="76.0" layoutY="14.0" />
+                                                <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" />
+                                                <CheckBox layoutX="76.0" layoutY="50.0" mnemonicParsing="false" text="Será Estado Final" />
+                                                <Button layoutX="371.0" layoutY="14.0" mnemonicParsing="false" text="Agregrar" />
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                  <Tab text="Eliminar">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Button layoutX="174.0" layoutY="14.0" mnemonicParsing="false" text="Eliminar" />
+                                                <ChoiceBox layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </content>
+                      </Tab>
+                        <Tab text="     𝛿     ">
+                           <content>
+                              <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Agregrar/Modificar">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <ChoiceBox layoutX="77.0" layoutY="14.0" prefWidth="150.0" />
+                                                <ComboBox layoutX="77.0" layoutY="46.0" prefWidth="150.0" />
+                                                <TextField layoutX="113.0" layoutY="77.0" />
+                                                <Text layoutX="27.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado:" />
+                                                <Text layoutX="27.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Símbolo:" />
+                                                <Text layoutX="27.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado(s) al que se transfiere:" wrappingWidth="84.638671875" />
+                                                <Text layoutX="263.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se pueden agregar varios estados a la vez separándolos por &quot;;&quot; (Punto y coma)" wrappingWidth="187.126953125" />
+                                                <Button layoutX="418.0" layoutY="14.0" mnemonicParsing="false" />
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                    <Tab text="Eliminar">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Button layoutX="375.0" layoutY="14.0" mnemonicParsing="false" text="Eliminar" />
+                                                <Text layoutX="27.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Símbolo:" />
+                                                <Text layoutX="27.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado:" />
+                                                <ComboBox layoutX="77.0" layoutY="46.0" prefWidth="150.0" />
+                                                <ChoiceBox layoutX="77.0" layoutY="14.0" prefWidth="150.0" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </Tab>
+                                </tabs>
+                              </TabPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </content>
+            </TitledPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="450.0" prefHeight="750.0" prefWidth="550.0" />
+      <AnchorPane prefHeight="550.0" prefWidth="450.0">
+         <children>
+            <TreeTableView prefHeight="550.0" prefWidth="450.0">
+              <columns>
+                <TreeTableColumn prefWidth="93.0" text="Q" />
+                <TreeTableColumn prefWidth="226.0" text="Σ" />
+                  <TreeTableColumn minWidth="2.0" prefWidth="85.0" text="ε" />
+                  <TreeTableColumn prefWidth="44.0" text="F" />
+              </columns>
+            </TreeTableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
