@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="EClosure" default="Help" basedir="." >
+
+  <property name="build.dir" value="build" />
+  <property name="src.dir"   value="src" />
+  <property name="lib.dir"   value="lib" />
+  <property name="doc.dir"   value="doc" />
+  <property name="demo.dir"   value="demo" />
+
+  <target name="Help">
+    <echo message="Compile | Compila el proyecto."/>
+    <echo message="Clean | Restaura la carpeta a su configuración inicial."/>
+    <echo message="Document | Compila, empaqueta y genera la documentación del proyecto."/>
+    <echo message="EClosure.jar | Compila y empaqueta el proyecto."/>
+    <echo message="Help | Muestra esta lista de opciones."/>
+  </target>
+
+  <target name="EClosure.jar" depends="Compile">
+    <jar jarfile="EClosure.jar">
+      <zipfileset dir="${build.dir}" prefix="" />
+      <zipgroupfileset dir="${lib.dir}" includes="*.jar" />
+      <manifest>
+        <attribute name="Main-Class" value="EClosure.App"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="Compile">
+    <mkdir dir="${build.dir}"/>
+    <javac srcdir="${src.dir}"
+           destdir="${build.dir}"
+           debug="true"
+           debuglevel="lines,vars,source"
+           includeantruntime="false"
+           deprecation="true"
+           nowarn="off"
+           encoding="utf-8">
+      <classpath>
+        <fileset dir="${lib.dir}">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+      <compilerarg value="-Xlint:unchecked"/>
+    </javac>
+    <copy todir="${build.dir}/EClosure/fxml">
+      <fileset dir="${src.dir}/EClosure/fxml"/>
+    </copy>
+  </target>
+
+  <target name="Document" depends="EClosure.jar">
+    <mkdir dir="${doc.dir}"/>
+    <javadoc packagenames="EClosure.*"
+             sourcepath="src"
+             defaultexcludes="yes"
+             destdir="${doc.dir}"
+             charset="UTF-8"
+             author="false"
+             version="false"
+             use="true"
+             windowtitle="EClosure"
+             encoding="utf-8">
+      <doctitle><![CDATA[<h1>EClosure</h1>]]></doctitle>
+      <link href="http://docs.oracle.com/javase/8/docs/api/" />
+    </javadoc>
+  </target>
+
+  <target name="Clean">
+    <delete file="EClosure.jar"/>
+    <delete dir="${build.dir}"/>
+    <delete dir="${doc.dir}"/>
+  </target>
+
+</project>
