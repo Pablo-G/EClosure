@@ -33,6 +33,8 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.PDFont;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import java.io.*;
 
 public class ControladorApp{
@@ -185,6 +187,16 @@ public class ControladorApp{
 		}
 	}
 
+	@FXML private ImageView graph;
+	@SuppressWarnings("unchecked") private void actualizaGrafica(){
+		try{
+			Image image = new Image("./[EClosure]GraficaAFNe.png");
+			graph.setImage(image);
+		}catch(Exception e){
+			//System.err.println(e);
+		}
+	}
+
 	@FXML private TextField sAgreT;
 	@FXML private Text sAgreErr;
 
@@ -214,6 +226,7 @@ public class ControladorApp{
 			}
 			sAgreErr.setText(errores);
 
+			actualizaGrafica();
 			actualizaListasDesp();
 			actualizaDatosTabla();
 		}
@@ -235,6 +248,7 @@ public class ControladorApp{
 			
 			qAgreErr.setText(errores);
 			
+			actualizaGrafica();
 			actualizaListasDesp();
 			actualizaDatosTabla();
 		}
@@ -255,6 +269,7 @@ public class ControladorApp{
 			
 			qModiErr.setText(errores);
 			
+			actualizaGrafica();
 			actualizaListasDesp();
 			actualizaDatosTabla();
 		}
@@ -267,6 +282,7 @@ public class ControladorApp{
 			}catch(Exception e){
 			}
 			
+			actualizaGrafica();
 			actualizaListasDesp();
 			actualizaDatosTabla();
 		}
@@ -313,6 +329,7 @@ public class ControladorApp{
 			
 			dAgreErr.setText(errores);
 
+			actualizaGrafica();
 			actualizaListasDesp();
 			actualizaDatosTabla();
 		}
@@ -330,6 +347,7 @@ public class ControladorApp{
 			
 			dModiErr.setText(errores);
 
+			actualizaGrafica();
 			actualizaListasDesp();
 			actualizaDatosTabla();
 		}
