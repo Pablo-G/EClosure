@@ -39,6 +39,20 @@ public class Estado{
 		return this.eFinal;
 	}
 
+	public void setNombre(String nNombre){
+		this.nombre = nNombre;
+	}
+
+	public void seteFinal(boolean neFinal){
+		this.eFinal = neFinal;
+	}
+
+	public void agregaTrans(Transicion t) throws TransitionAlreadyExistsException{
+		if (!this.transiciones.add(t)) {
+			throw new TransitionAlreadyExistsException("Esta transicion ya esta en Delta");
+		}
+	}
+
 	@Override public boolean equals(Object o) {
         if (o == null){
             return false;

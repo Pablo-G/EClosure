@@ -38,7 +38,7 @@ public class Transicion{
         if (this.simbolo != t.getSimbolo()){
             return false;
         }
-        if (!this.estados.equals(e.getEstados())){
+        if (!this.estados.equals(t.getEstados())){
         	return false;
         }
         return true;
