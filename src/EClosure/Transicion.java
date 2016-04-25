@@ -14,19 +14,35 @@ public class Transicion{
 	private String simbolo;
 	private HashSet<Estado> estados;
 
+    /**
+     * Constructor.
+     */
 	public Transicion(String simbolo, HashSet<Estado> estados){
 		this.simbolo = simbolo;
 		this.estados = estados;
 	}
 
+    /**
+     *<code>getSimbolo</code> Método que regresa el simbolo de la transicion.
+     *@return tipo <code>String</code>: Simbolo con el que se realiza la transicion.
+     */
 	public String getSimbolo(){
 		return this.simbolo;
 	}
 
+    /**
+     *<code>getEstados</code> Método que regresa el conjunto de estados al que se hace la transicion.
+     *@return tipo <code>HashSet<Estado></code>: Conjunto de estados al que se hace la transicion.
+     */
 	public HashSet<Estado> getEstados(){
 		return this.estados;
 	}
 
+    /**
+     *<code>equals</code> Método que dice si un objeto es igual.
+     *@param o tipo <code>Object</code>: Objeto a comparar.
+     *@return tipo <code>boolean<Estado></code>: True si y solo si el simbolo y los estados de la transicion son los mismos.
+     */
 	@Override public boolean equals(Object o) {
         if (o == null){
             return false;
